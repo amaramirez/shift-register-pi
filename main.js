@@ -21,6 +21,7 @@ const ePin = new gpio(4, 'out');
 
 let i = 0;
 
+
 const mainLoop = () => {
 	i++;
 	i%=8;
@@ -30,41 +31,3 @@ const mainLoop = () => {
 }
 
 setInterval(mainLoop, 500);
-
-
-
-
-
-
-
-
-
-
-
-
-const main = async () => {
-	let i = 0;
-	let k = 0;
-
-	let pattern1 = [0xC3, 0x3C];
-
-	// Main loop
-	while(true){
-		for (i = 0; i < 7; i++) {
-			lPin.writeSync(0);
-			sendShift(dPin, cPin, BE, 0x01 << i);
-			lPin.writeSync(1);
-			await sleep(60);
-		}
-
-		for (i = 0; i < 7; i++) {
-			lPin.writeSync(0);
-			sendShift(dPin, cPin, LE, 0x01 << i);
-			lPin.writeSync(1);
-			await sleep(60);
-		}
-	}
-
-}
-
-main();
