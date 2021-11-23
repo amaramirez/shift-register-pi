@@ -4,8 +4,7 @@ const LE = 0;
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
-const sendShift = (data, clock, latch, order, value) => {
-	latch.writeSync(0);
+const sendShift = (data, clock, order, value) => {
 
   for (let i = 0; i < 8; i++) {
     clock.writeSync(0);
@@ -18,7 +17,6 @@ const sendShift = (data, clock, latch, order, value) => {
     clock.writeSync(1);
   }
 
-  latch.writeSync(1);
   clock.writeSync(0);
   data.writeSync(0);
 }

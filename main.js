@@ -51,11 +51,17 @@ const main = async () => {
 	// Main loop
 	while(true){
 		for (i = 0; i < 7; i++) {
-			sendShift(dPin, cPin, lPin, BE, 0x01 << k);
+			lPin.writeSync(0);
+			sendShift(dPin, cPin, BE, 0x01 << i);
+			lPin.writeSync(1);
+			await sleep(60);
 		}
 
 		for (i = 0; i < 7; i++) {
-			sendShift(dPin, cPin, lPin, LE, 0x01 << k);
+			lPin.writeSync(0);
+			sendShift(dPin, cPin, LE, 0x01 << i);
+			lPin.writeSync(1);
+			await sleep(60);
 		}
 	}
 
